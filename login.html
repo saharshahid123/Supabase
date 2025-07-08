@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+      <div class="blob-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="logo">
+                <i class="fas fa-cloud"></i>
+                <span>Pastel Dreams</span>
+            </div>
+
+            <h1 class="auth-title">Welcome Back</h1>
+            <p class="auth-subtitle">Login to your pastel world</p>
+
+            <form id="login-form" class="auth-form">
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="login-email" placeholder="Your email" required>
+                </div>
+
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="login-password" placeholder="Your password" required>
+                </div>
+
+                <button type="submit" class="auth-btn primary-btn">
+                    <span>Log In</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+
+                <div class="divider">
+                    <span>or</span>
+                </div>
+
+                <button type="button" id="googleLoginBtn" class="auth-btn google-btn">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google">
+                    <span>Continue with Google</span>
+                </button>
+
+                <p class="auth-footer">
+                    Don't have an account? <a href="index.html">Sign up</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <div id="loader" class="loader"></div>         for home.html    <div class="dashboard-container">
+        <nav class="navbar">
+            <div class="logo">PastelAuth</div>
+            <button id="logoutBtn" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </nav>
+        
+        <div class="welcome-card">
+            <div class="welcome-content">
+                <h1>Welcome, <span id="user-email"></span>!</h1>
+                <p>You've successfully logged in to our beautiful pastel-themed authentication system.</p>
+                <div class="user-icon">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </div>
+        </div>
+    </div>   
+
+     <!-- Supabase js  -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- app.js -->
+    <script src="app.js"></script>
+</body>
+
+</html>
