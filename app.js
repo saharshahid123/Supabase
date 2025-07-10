@@ -286,12 +286,234 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+// const projectUrl = "https://zgdyuwvvjvpnjiutumsz.supabase.co";
+// const projectKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpnZHl1d3Z2anZwbmppdXR1bXN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE0Mzg2MTUsImV4cCI6MjA2NzAxNDYxNX0.kbDfl4P6K-9YV-UBFEvCSW3YoKwQDOZ1IGhggFVzsvw";
+
+// const { createClient } = supabase;
+// const client = createClient(projectUrl, projectKey);
+
+// // Common functions
+// function showLoader() {
+//     const loader = document.getElementById("loader");
+//     if (loader) loader.style.display = "flex";
+// }
+
+// function hideLoader() {
+//     const loader = document.getElementById("loader");
+//     if (loader) loader.style.display = "none";
+// }
+
+// function showError(message) {
+//     alert(message); // In a real app, you'd show a prettier error message
+// }
+
+// // Signup functionality
+// const signupForm = document.getElementById("signup-form");
+// if (signupForm) {
+//     signupForm.addEventListener("submit", async (e) => {
+//         e.preventDefault();
+
+//         const email = document.getElementById("signup-email").value;
+//         const password = document.getElementById("signup-password").value;
+
+//         if (!email || !password) {
+//             showError("Please fill all fields");
+//             return;
+//         }
+
+//         try {
+//             showLoader();
+//             const { data, error } = await client.auth.signUp({
+//                 email,
+//                 password,
+//             });
+
+//             if (error) throw error;
+
+//             alert("Signup successful! Please check your email for verification.");
+//             window.location.href = "login.html";
+//         } catch (error) {
+//             console.error("Signup Error:", error);
+//             showError(error.message || "Signup failed. Please try again.");
+//         } finally {
+//             hideLoader();
+//         }
+//     });
+// }
+
+// // Login functionality
+// const loginForm = document.getElementById("login-form");
+// if (loginForm) {
+//     loginForm.addEventListener("submit", async (e) => {
+//         e.preventDefault();
+
+//         const email = document.getElementById("login-email").value;
+//         const password = document.getElementById("login-password").value;
+
+//         if (!email || !password) {
+//             showError("Please fill all fields");
+//             return;
+//         }
+
+//         try {
+//             showLoader();
+//             const { data, error } = await client.auth.signInWithPassword({
+//                 email,
+//                 password,
+//             });
+
+//             if (error) throw error;
+
+//             window.location.href = "home.html";
+//         } catch (error) {
+//             console.error("Login Error:", error);
+//             showError(error.message || "Login failed. Please check your credentials.");
+//         } finally {
+//             hideLoader();
+//         }
+//     });
+// }
+
+// // Google Auth function
+// async function handleGoogleAuth() {
+//     try {
+//         showLoader();
+//         const { data, error } = await client.auth.signInWithOAuth({
+//             provider: 'google',
+//             options: {
+//                 redirectTo: window.location.origin + "/home.html"
+//             }
+//         });
+
+//         if (error) throw error;
+//     } catch (error) {
+//         console.error("Google Auth Error:", error);
+//         showError("Google authentication failed. Please try again.");
+//     } finally {
+//         hideLoader();
+//     }
+// }
+
+// // Attach Google Auth to buttons
+// const googleSignInBtn = document.getElementById("googleSignInBtn");
+// const googleLoginBtn = document.getElementById("googleLoginBtn");
+
+// if (googleSignInBtn) googleSignInBtn.addEventListener("click", handleGoogleAuth);
+// if (googleLoginBtn) googleLoginBtn.addEventListener("click", handleGoogleAuth);
+
+// // Home page functionality
+// const userEmailSpan = document.getElementById("user-email");
+// if (userEmailSpan) {
+//     client.auth.getUser().then(({ data: { user } }) => {
+//         if (user) {
+//             userEmailSpan.textContent = user.email;
+//         } else {
+//             window.location.href = "login.html";
+//         }
+//     });
+// }
+
+// // Logout functionality
+// const logoutBtn = document.getElementById("logoutBtn");
+// if (logoutBtn) {
+//     logoutBtn.addEventListener("click", async () => {
+//         try {
+//             const { error } = await client.auth.signOut();
+//             if (error) throw error;
+//             window.location.href = "login.html";
+//         } catch (error) {
+//             console.error("Logout Error:", error);
+//             showError("Logout failed. Please try again.");
+//         }
+//     });
+// }
+
+// // Check auth state on page load
+// client.auth.onAuthStateChange((event, session) => {
+//     if (event === "INITIAL_SESSION" && !session) {
+//         // User is not logged in
+//         if (window.location.pathname.includes("home.html")) {
+//             window.location.href = "login.html";
+//         }
+//     }
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
 const projectUrl = "https://zgdyuwvvjvpnjiutumsz.supabase.co";
 const projectKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpnZHl1d3Z2anZwbmppdXR1bXN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE0Mzg2MTUsImV4cCI6MjA2NzAxNDYxNX0.kbDfl4P6K-9YV-UBFEvCSW3YoKwQDOZ1IGhggFVzsvw";
 
 const { createClient } = supabase;
 const client = createClient(projectUrl, projectKey);
 
+// 1. PASSWORD TOGGLE FUNCTIONALITY
+function setupPasswordToggles() {
+    // For login page
+    const loginPasswordToggle = document.getElementById("toggleLoginPassword");
+    const loginPasswordInput = document.getElementById("login-password");
+
+    if (loginPasswordToggle && loginPasswordInput) {
+        loginPasswordToggle.addEventListener("click", () => {
+            const type = loginPasswordInput.type === "password" ? "text" : "password";
+            loginPasswordInput.type = type;
+            loginPasswordToggle.classList.toggle("fa-eye-slash");
+            loginPasswordToggle.classList.toggle("fa-eye");
+        });
+    }
+
+    // For signup page
+    const signupPasswordToggle = document.getElementById("toggleSignupPassword");
+    const signupPasswordInput = document.getElementById("signup-password");
+
+    if (signupPasswordToggle && signupPasswordInput) {
+        signupPasswordToggle.addEventListener("click", () => {
+            const type = signupPasswordInput.type === "password" ? "text" : "password";
+            signupPasswordInput.type = type;
+            signupPasswordToggle.classList.toggle("fa-eye-slash");
+            signupPasswordToggle.classList.toggle("fa-eye");
+        });
+    }
+
+    // For confirm password
+    const confirmPasswordToggle = document.getElementById("toggleSignupConfirmPassword");
+    const confirmPasswordInput = document.getElementById("signup-confirm-password");
+
+    if (confirmPasswordToggle && confirmPasswordInput) {
+        confirmPasswordToggle.addEventListener("click", () => {
+            const type = confirmPasswordInput.type === "password" ? "text" : "password";
+            confirmPasswordInput.type = type;
+            confirmPasswordToggle.classList.toggle("fa-eye-slash");
+            confirmPasswordToggle.classList.toggle("fa-eye");
+        });
+    }
+}
+
+// Initialize password toggles on page load
+document.addEventListener("DOMContentLoaded", setupPasswordToggles);
+
+// 2. YOUR EXISTING AUTH CODE (with minor improvements)
 // Common functions
 function showLoader() {
     const loader = document.getElementById("loader");
@@ -304,7 +526,7 @@ function hideLoader() {
 }
 
 function showError(message) {
-    alert(message); // In a real app, you'd show a prettier error message
+    alert(message);
 }
 
 // Signup functionality
@@ -315,9 +537,16 @@ if (signupForm) {
 
         const email = document.getElementById("signup-email").value;
         const password = document.getElementById("signup-password").value;
+        const confirmPassword = document.getElementById("signup-confirm-password")?.value;
 
         if (!email || !password) {
-            showError("Please fill all fields");
+            showError("Please fill all required fields");
+            return;
+        }
+
+        // Check if passwords match (if confirm password field exists)
+        if (confirmPassword && password !== confirmPassword) {
+            showError("Passwords don't match");
             return;
         }
 
@@ -431,7 +660,6 @@ if (logoutBtn) {
 // Check auth state on page load
 client.auth.onAuthStateChange((event, session) => {
     if (event === "INITIAL_SESSION" && !session) {
-        // User is not logged in
         if (window.location.pathname.includes("home.html")) {
             window.location.href = "login.html";
         }
